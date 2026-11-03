@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cashier Order Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="dashboard-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Order management</p>
+          <h1>Cashier</h1>
+        </div>
+        <a class="cashier-link" href="/" target="_blank" rel="noopener">Open customer display</a>
+      </header>
+
+      <main class="cashier-screen-layout" aria-label="Cashier order management">
+        <aside class="panel cashier-panel" aria-labelledby="cashier-title">
+          <div class="panel-header">
+            <h2 id="cashier-title">Add an order</h2>
+          </div>
+          <form id="orderForm" class="order-form">
+            <label for="orderNumberInput">Order number</label>
+            <input
+              id="orderNumberInput"
+              name="orderNumber"
+              type="number"
+              min="1"
+              step="1"
+              placeholder="e.g. 62"
+              required
+            />
+            <button class="add-order-button" type="submit">Add to preparing</button>
+          </form>
+          <p class="cashier-hint">Double-click a Preparing order to mark it Ready. Remove Ready orders when collected.</p>
+        </aside>
+
+        <div>
+          <p id="syncStatus" class="sync-status" role="status" aria-live="polite">Connecting to customer display...</p>
+          <div class="board-grid">
+            <section class="panel panel-preparing" aria-labelledby="preparing-title">
+              <div class="panel-header">
+                <h2 id="preparing-title">Preparing</h2>
+                <span id="preparingCount" class="count-badge">0</span>
+              </div>
+              <div id="preparingList" class="order-list"></div>
+            </section>
+
+            <section class="panel panel-ready" aria-labelledby="ready-title">
+              <div class="panel-header">
+                <h2 id="ready-title">Ready</h2>
+                <span id="readyCount" class="count-badge">0</span>
+              </div>
+              <div id="readyList" class="order-list"></div>
+            </section>
+          </div>
+
+          <section class="panel stats-panel" aria-labelledby="stats-title">
+            <div class="panel-header stats-header">
+              <h2 id="stats-title">Daily statistics</h2>
+              <label class="stats-date-label" for="statsDate">Day</label>
+              <input id="statsDate" type="date" />
+              <button id="exportReportButton" class="export-report-button" type="button">Download Excel</button>
+            </div>
+            <div class="stats-grid">
+              <article class="stat-card">
+                <span class="stat-label">Orders added</span>
+                <strong id="statsTotal" class="stat-value">—</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Ready</span>
+                <strong id="statsReady" class="stat-value">—</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Collected</span>
+                <strong id="statsCollected" class="stat-value">—</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Average preparation</span>
+                <strong id="statsPreparationTime" class="stat-value">—</strong>
+              </article>
+              <article class="stat-card">
+                <span class="stat-label">Average ready to collected</span>
+                <strong id="statsCollectionTime" class="stat-value">—</strong>
+              </article>
+            </div>
+          </section>
+
+          <section class="panel history-panel" aria-labelledby="history-title">
+            <div class="panel-header history-header">
+              <h2 id="history-title">Order history</h2>
+              <span id="historyCount" class="history-count">0 orders</span>
+            </div>
+            <div class="history-table-wrap">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Added</th>
+                    <th scope="col">Ready</th>
+                    <th scope="col">Collected</th>
+                  </tr>
+                </thead>
+                <tbody id="orderHistory"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="cashier.js"></script>
+  </body>
+</html>

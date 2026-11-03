@@ -1,0 +1,15 @@
+services:
+  order-dashboard:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      HOST: 0.0.0.0
+      DB_PATH: /data/orders.sqlite3
+    volumes:
+      - order-data:/data
+    restart: unless-stopped
+
+volumes:
+  order-data:
