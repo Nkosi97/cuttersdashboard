@@ -2,6 +2,9 @@ function renderOrders(orders) {
   const preparingList = document.getElementById('preparingList');
   const readyList = document.getElementById('readyList');
 
+  setOrderDensity(preparingList, orders.preparing.length);
+  setOrderDensity(readyList, orders.ready.length);
+
   preparingList.innerHTML = orders.preparing
     .map(
       (order) => `
@@ -27,6 +30,11 @@ function renderOrders(orders) {
 
   document.getElementById('preparingCount').textContent = orders.preparing.length;
   document.getElementById('readyCount').textContent = orders.ready.length;
+}
+
+function setOrderDensity(list, count) {
+  list.dataset.density =
+    count > 14 ? 'tight' : count > 8 ? 'dense' : count > 4 ? 'compact' : 'normal';
 }
 
 const syncStatus = document.getElementById('syncStatus');

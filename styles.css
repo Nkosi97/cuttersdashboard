@@ -569,3 +569,156 @@ h2 {
     height: 32px;
   }
 }
+
+.cashier-page {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.cashier-page .dashboard-shell {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cashier-page .topbar {
+  flex: 0 0 auto;
+  margin-bottom: clamp(10px, 1.5vh, 20px);
+}
+
+.cashier-page .cashier-screen-layout {
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+  gap: clamp(12px, 1.5vw, 22px);
+}
+
+.cashier-page .cashier-panel {
+  align-self: start;
+}
+
+.cashier-page .cashier-content {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  gap: clamp(8px, 1.2vh, 14px);
+  min-width: 0;
+  min-height: 0;
+}
+
+.cashier-page .sync-status {
+  margin: 0;
+}
+
+.cashier-page .board-grid {
+  min-height: 0;
+}
+
+.cashier-page .board-grid > .panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.cashier-page .order-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.cashier-page .stats-panel,
+.cashier-page .history-panel {
+  margin-top: 0;
+}
+
+.cashier-page .stats-panel .panel-header,
+.cashier-page .history-panel .panel-header {
+  padding: 10px 16px;
+}
+
+.cashier-page .stats-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px 12px 12px;
+}
+
+.cashier-page .stat-card {
+  min-height: 62px;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+
+.cashier-page .stat-label {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.cashier-page .stat-value {
+  font-size: 1.15rem;
+}
+
+.cashier-page .history-toggle {
+  min-height: 34px;
+}
+
+.cashier-page .history-table-wrap {
+  max-height: 30dvh;
+  overflow: auto;
+}
+
+@media (max-width: 1000px) and (min-width: 761px) {
+  .cashier-page .cashier-screen-layout {
+    grid-template-columns: minmax(190px, 0.6fr) minmax(0, 2fr);
+  }
+
+  .cashier-page .stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .cashier-page {
+    height: auto;
+    min-height: 100dvh;
+    overflow: auto;
+  }
+
+  .cashier-page .dashboard-shell {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .cashier-page .cashier-screen-layout {
+    flex: initial;
+    min-height: initial;
+    gap: 14px;
+  }
+
+  .cashier-page .cashier-content {
+    grid-template-rows: auto auto auto auto;
+    min-height: initial;
+  }
+
+  .cashier-page .board-grid > .panel {
+    min-height: 0;
+  }
+
+  .cashier-page .order-list {
+    flex: initial;
+    max-height: 42dvh;
+  }
+
+  .cashier-page .stats-header {
+    flex-wrap: wrap;
+  }
+
+  .cashier-page .stats-header h2 {
+    flex: 1 0 100%;
+  }
+
+  .cashier-page .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
