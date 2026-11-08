@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   font-family: "Inter", sans-serif;
   background:
     linear-gradient(
@@ -32,9 +32,12 @@ body {
 }
 
 .dashboard-shell {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 32px 24px;
+  width: min(100%, 1600px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: clamp(12px, 2vw, 32px);
+  display: flex;
+  flex-direction: column;
 }
 
 .topbar {
@@ -75,12 +78,14 @@ h1 {
 }
 
 .board-grid {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: clamp(10px, 1.5vw, 24px);
 }
 
 .panel {
+  min-width: 0;
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(148, 164, 190, 0.22);
   border-radius: 28px;
@@ -379,10 +384,36 @@ h2 {
 }
 
 .order-list {
+  --card-min-height: clamp(88px, 14vh, 160px);
+  --card-gap: 14px;
+  --card-padding: 16px 10px;
+  --number-size: clamp(1.7rem, 2.5vw, 3.2rem);
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  padding: 22px 20px 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 125px), 1fr));
+  align-content: start;
+  gap: var(--card-gap);
+  padding: clamp(10px, 1.5vw, 22px);
+}
+
+.order-list[data-density="compact"] {
+  --card-min-height: clamp(76px, 11vh, 120px);
+  --card-gap: 10px;
+  --card-padding: 12px 8px;
+  --number-size: clamp(1.5rem, 2vw, 2.5rem);
+}
+
+.order-list[data-density="dense"] {
+  --card-min-height: clamp(64px, 8vh, 92px);
+  --card-gap: 7px;
+  --card-padding: 9px 6px;
+  --number-size: clamp(1.3rem, 1.7vw, 2rem);
+}
+
+.order-list[data-density="tight"] {
+  --card-min-height: clamp(52px, 6vh, 72px);
+  --card-gap: 5px;
+  --card-padding: 6px 4px;
+  --number-size: clamp(1.1rem, 1.4vw, 1.6rem);
 }
 
 .order-card {
@@ -391,9 +422,9 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 160px;
-  border-radius: 20px;
-  padding: 18px 12px;
+  min-height: var(--card-min-height);
+  border-radius: clamp(10px, 1.2vw, 20px);
+  padding: var(--card-padding);
   border: 2px solid transparent;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -421,11 +452,11 @@ h2 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   opacity: 0.75;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .order-number {
-  font-size: clamp(2.1rem, 1.8vw + 1rem, 3.2rem);
+  font-size: var(--number-size);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -458,19 +489,61 @@ h2 {
 
 @media (max-width: 760px) {
   .dashboard-shell {
-    margin: 18px auto;
-    padding: 18px 14px;
+    padding: 12px;
   }
 
   .cashier-screen-layout,
-  .board-grid,
-  .order-list {
+  .board-grid {
     grid-template-columns: 1fr;
+  }
+
+  .board-grid {
+    gap: 12px;
+  }
+
+  .order-list {
+    --card-min-height: clamp(72px, 10vh, 110px);
+    --number-size: clamp(1.5rem, 7vw, 2.4rem);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 105px), 1fr));
+  }
+
+  .order-list[data-density="compact"] {
+    --card-min-height: clamp(64px, 8vh, 90px);
+    --number-size: clamp(1.35rem, 6vw, 2rem);
+  }
+
+  .order-list[data-density="dense"] {
+    --card-min-height: clamp(56px, 7vh, 76px);
+    --number-size: clamp(1.2rem, 5vw, 1.65rem);
+  }
+
+  .order-list[data-density="tight"] {
+    --card-min-height: clamp(48px, 6vh, 62px);
+    --number-size: clamp(1.05rem, 4vw, 1.35rem);
   }
 
   .topbar {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+}
+
+@media (max-height: 700px) {
+  .topbar {
+    margin-bottom: 12px;
+  }
+
+  .sync-status {
+    margin-bottom: 8px;
+  }
+
+  .panel-header {
+    padding: 12px 16px;
+  }
+
+  .count-badge {
+    min-width: 36px;
+    height: 32px;
   }
 }

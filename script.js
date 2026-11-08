@@ -2,6 +2,9 @@ function renderOrders(orders) {
   const preparingList = document.getElementById('preparingList');
   const readyList = document.getElementById('readyList');
 
+  setOrderDensity(preparingList, orders.preparing.length);
+  setOrderDensity(readyList, orders.ready.length);
+
   preparingList.innerHTML = orders.preparing
     .map(
       (order) => `
@@ -28,11 +31,16 @@ function renderOrders(orders) {
   document.getElementById('readyCount').textContent = orders.ready.length;
 }
 
+function setOrderDensity(list, count) {
+  list.dataset.density =
+    count > 14 ? 'tight' : count > 8 ? 'dense' : count > 4 ? 'compact' : 'normal';
+}
+
 const syncStatus = document.getElementById('syncStatus');
 
 async function refreshOrders() {
   try {
-    const response = await fetch('/api/orders');
+    const response = await fetch('/api/orders', { cache: 'no-store' });
     if (!response.ok) throw new Error('Unable to load orders.');
     renderOrders(await response.json());
     syncStatus.textContent = 'Live customer display';
@@ -44,4 +52,4 @@ async function refreshOrders() {
 }
 
 refreshOrders();
-window.setInterval(refreshOrders, 2000);
+window.setInterval(refreshOrders, 3000);

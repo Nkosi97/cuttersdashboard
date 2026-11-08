@@ -8,7 +8,7 @@ Install Docker Desktop, then run this command from the project folder:
 docker compose up --build
 ```
 
-Open the cashier screen at [http://localhost:8080/cashier.html](http://localhost:8080/cashier.html). Open [http://localhost:8080/](http://localhost:8080/) on the customer display. Both pages use the same SQLite database and refresh order status automatically.
+Open the cashier screen at [http://localhost:8080/cashier.html](http://localhost:8080/cashier.html). Open [http://localhost:8080/](http://localhost:8080/) on the customer display. Both pages use the same SQLite database and refresh order status every three seconds.
 
 The `order-data` Docker volume persists order history and statistics if the container restarts or is rebuilt. Back up this volume to retain the data. Do not remove it with `docker compose down -v` unless you intend to delete the stored orders.
 
