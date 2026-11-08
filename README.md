@@ -12,6 +12,14 @@ Open the cashier screen at [http://localhost:8000/cashier.html](http://localhost
 
 The `order-data` Docker volume persists order history and statistics if the container restarts or is rebuilt. Back up this volume to retain the data. Do not remove it with `docker compose down -v` unless you intend to delete the stored orders.
 
+## Deploy to Railway
+
+1. In Railway, create a project from this GitHub repository. Railway will build the included `Dockerfile`.
+2. Add a volume to the service and set its mount path to `/data`. The container is configured to store the SQLite database at `/data/orders.sqlite3`; without the volume, order data will not persist across redeploys.
+3. In the service's **Settings → Networking**, generate a public domain. The customer display is at `/`, and the cashier screen is at `/cashier.html`.
+
+Both screens and the order API are public, and the app has no authentication. Anyone with the domain can view orders and use the cashier screen to change them. Only expose it publicly if that is acceptable for your use case; do not use it for sensitive customer information.
+
 ## Daily statistics
 
 The cashier screen reports the selected local calendar day:
