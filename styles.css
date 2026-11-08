@@ -270,6 +270,28 @@ h1 {
   font-weight: 600;
 }
 
+.history-toggle {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: #245fd1;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.history-toggle:hover {
+  background: #f4f7fb;
+}
+
+.history-toggle:focus-visible {
+  outline: 3px solid rgba(47, 111, 237, 0.35);
+  outline-offset: 2px;
+}
+
 .history-table-wrap {
   overflow-x: auto;
 }

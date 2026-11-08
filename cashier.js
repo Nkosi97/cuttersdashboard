@@ -103,6 +103,16 @@ function renderOrderHistory(orders) {
     .join('');
 }
 
+const historyToggle = document.getElementById('historyToggle');
+const historyContent = document.getElementById('historyContent');
+
+historyToggle.addEventListener('click', () => {
+  const isExpanded = historyToggle.getAttribute('aria-expanded') !== 'true';
+  historyToggle.setAttribute('aria-expanded', String(isExpanded));
+  historyContent.hidden = !isExpanded;
+  historyToggle.textContent = isExpanded ? 'Hide history' : 'View history';
+});
+
 async function loadStatistics() {
   const date = document.getElementById('statsDate').value;
   const range = localDayRange(date);

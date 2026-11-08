@@ -95,8 +95,17 @@
             <div class="panel-header history-header">
               <h2 id="history-title">Order history</h2>
               <span id="historyCount" class="history-count">0 orders</span>
+              <button
+                id="historyToggle"
+                class="history-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="historyContent"
+              >
+                View history
+              </button>
             </div>
-            <div class="history-table-wrap">
+            <div id="historyContent" class="history-table-wrap" hidden>
               <table class="history-table">
                 <thead>
                   <tr>
