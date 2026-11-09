@@ -19,10 +19,9 @@ function renderOrders(orders) {
   readyList.innerHTML = orders.ready
     .map(
       (order) => `
-        <article class="order-card" aria-label="Ready order number ${order.orderNumber}">
+        <article class="order-card cashier-ready-order-card" data-order-id="${order.id}" aria-label="Ready order number ${order.orderNumber}">
           <span class="order-label">Ready</span>
           <span class="order-number">#${order.orderNumber}</span>
-          <button class="remove-order-button" type="button" data-order-id="${order.id}" aria-label="Remove order ${order.orderNumber}">Remove</button>
         </article>
       `
     )
@@ -202,12 +201,16 @@ document.getElementById('preparingList').addEventListener('dblclick', async (eve
   }
 });
 
-document.getElementById('readyList').addEventListener('click', async (event) => {
-  const removeButton = event.target.closest('.remove-order-button');
-  if (!removeButton) return;
+document.getElementById('readyList').addEventListener('dblclick', async (event) => {
+  const orderCard = event.target.closest('.cashier-ready-order-card');
+  if (!orderCard) return;
 
+  await collectReadyOrder(orderCard.dataset.orderId);
+});
+
+async function collectReadyOrder(orderId) {
   try {
-    const response = await fetch(`/api/orders/${removeButton.dataset.orderId}`, {
+    const response = await fetch(`/api/orders/${orderId}`, {
       method: 'DELETE',
     });
     const result = await response.json();
@@ -216,7 +219,7 @@ document.getElementById('readyList').addEventListener('click', async (event) => 
   } catch (error) {
     setStatus(error.message, true);
   }
-});
+}
 
 statsDate.addEventListener('change', () => {
   loadStatistics().catch((error) => setStatus(error.message, true));

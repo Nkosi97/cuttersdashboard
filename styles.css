@@ -118,7 +118,7 @@ h1 {
 
 .order-form input:focus-visible,
 .add-order-button:focus-visible,
-.remove-order-button:focus-visible {
+.history-toggle:focus-visible {
   outline: 3px solid rgba(47, 111, 237, 0.35);
   outline-offset: 2px;
 }
@@ -362,6 +362,10 @@ h1 {
   cursor: pointer;
 }
 
+.cashier-ready-order-card {
+  cursor: pointer;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -490,23 +494,6 @@ h2 {
 
 .panel-ready .order-number {
   color: #0c7a3d;
-}
-
-.remove-order-button {
-  margin-top: 12px;
-  padding: 6px 12px;
-  border: 1px solid rgba(193, 69, 69, 0.25);
-  border-radius: 999px;
-  background: #fff;
-  color: #a93232;
-  font: inherit;
-  font-size: 0.78rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.remove-order-button:hover {
-  background: #fff0f0;
 }
 
 @media (max-width: 760px) {
